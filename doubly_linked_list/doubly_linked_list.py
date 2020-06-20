@@ -74,7 +74,23 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_head(self):
-        pass
+
+        if self.head is None:
+            self.head = None
+            self.tail = None
+            return None
+
+        old_head_value = self.head.value
+        if self.head.next is None:
+            self.length -= 1
+            self.head = None
+            self.tail = None
+
+        if self.head is not None:
+            self.length -= 1
+            self.head = self.head.next
+
+        return old_head_value
 
     """Wraps the given value in a ListNode and inserts it
     as the new tail of the list. Don't forget to handle
@@ -128,7 +144,6 @@ class DoublyLinkedList:
 
     def delete(self, node):
         pass
-
     """Returns the highest value currently in the list"""
 
     def get_max(self):
@@ -153,3 +168,27 @@ class DoublyLinkedList:
 
         # Return the largest number once the loop is done
         return largest_value
+
+
+node = ListNode(1)
+dll = DoublyLinkedList(node)
+
+
+# test
+
+dll.remove_from_head()
+print("Head", dll.head, None)
+print("Tail", dll.tail, None)
+print(len(dll), 0)
+
+dll.add_to_head(2)
+print(dll.head.value, 2)
+print(dll.tail.value, 2)
+print(len(dll), 1)
+print(dll.remove_from_head(), 2)
+print(len(dll), 0)
+
+dll.add_to_head(55)
+print(len(dll), 1)
+print(dll.remove_from_head(), 55)
+print(len(dll), 0)

@@ -100,6 +100,21 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List."""
 
     def move_to_front(self, node):
+        if self.head is None:
+            self.head = node
+            self.tail = node
+        else:
+            ddl = self.head
+            while True:
+                if ddl == node:
+                    ddl.delete()
+                    self.head = node
+                    self.head.next = ddl
+                    ddl.prev = self.head
+                    break
+                else:
+                    ddl = ddl.next
+
         pass
 
     """Removes the input node from its current spot in the
@@ -117,4 +132,24 @@ class DoublyLinkedList:
     """Returns the highest value currently in the list"""
 
     def get_max(self):
-        pass
+        if self.head is None:
+            return None
+
+        # If theres no next Node return the head nodes value
+        if self.head.next is None:
+            return self.head.value
+
+        # Asign the head node to a variable called node
+        # Create a var to hold the largest value
+        node = self.head
+        largest_value = 0
+
+        # loop through the list
+        while node is not None:
+            # if the node value is greater than the previous largest number assign the node value to the largest number
+            if node.value > largest_value:
+                largest_value = node.value
+            node = node.next
+
+        # Return the largest number once the loop is done
+        return largest_value

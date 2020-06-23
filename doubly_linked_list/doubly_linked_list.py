@@ -110,7 +110,25 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_tail(self):
-        pass
+
+        if self.tail:
+
+            if self.tail is None:
+                self.tail = None
+                self.tail = None
+                return None
+
+            old_tail_value = self.tail.value
+            if self.tail.prev is not None:
+                self.length -= 1
+                self.tail = None
+                self.head = None
+
+            if self.tail is not None:
+                self.length -= 1
+                self.tail = self.tail.prev
+
+            return old_tail_value
 
     """Removes the input node from its current spot in the
     List and inserts it as the new head node of the List."""
@@ -130,8 +148,6 @@ class DoublyLinkedList:
                     break
                 else:
                     ddl = ddl.next
-
-        pass
 
     """Removes the input node from its current spot in the
     List and inserts it as the new tail node of the List."""
@@ -172,23 +188,23 @@ class DoublyLinkedList:
 
 node = ListNode(1)
 dll = DoublyLinkedList(node)
-
-
-# test
-
-dll.remove_from_head()
-print("Head", dll.head, None)
-print("Tail", dll.tail, None)
+dll.remove_from_tail()
+print(dll.head)
+print(dll.tail)
 print(len(dll), 0)
 
-dll.add_to_head(2)
-print(dll.head.value, 2)
-print(dll.tail.value, 2)
+
+print(dir(dll))
+dll.add_to_tail(33)
+
+
+print(dll.head.value, 33)
+print(dll.tail.value, 33)
 print(len(dll), 1)
-print(dll.remove_from_head(), 2)
+print(dll.remove_from_tail(), 33)
 print(len(dll), 0)
 
-dll.add_to_head(55)
+dll.add_to_tail(68)
 print(len(dll), 1)
-print(dll.remove_from_head(), 55)
+print(dll.remove_from_tail(), 68)
 print(len(dll), 0)

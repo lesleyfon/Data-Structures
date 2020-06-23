@@ -51,6 +51,40 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
+        if self.value is None:
+            return False
+        else:
+            # Create a variable that will keep track of the what we want to return.
+
+            if target < self.value:
+                # If the target is less than the current node value we want to discard the right side of the tree and search only on the left side
+                left_node = self.left
+                # Now we are looking at the next node. If the node is truthy then we want to do some checks and see if the value is in the left side of the node
+                if left_node:
+                    # Check is left_node.value is equal to the current target then we return true else we call call contains again to go over this process recursively
+                    if left_node.value == target:
+                        return True
+                    else:
+                        left_node.contains(target)
+                else:
+                    # That means we didn't find a match and we want to return false
+                    return False
+            else:
+                # The target is greater than the root node value and we want to check on the right side of the tree
+                right_node = self.right
+                # If the right node is true then we want to essentially do some work
+                if right_node:
+                    # That means we have found a match and we want we return true
+                    if right_node.value == target:
+                        return True
+                    else:
+                        # call the function recursively and keep checking until we have exhausted all our options
+                        right_node.contains(target)
+                    pass
+                else:
+                    # else we have hit the leaf node and want to just return false
+                    return False
+
         pass
 
     # Return the maximum value found in the tree

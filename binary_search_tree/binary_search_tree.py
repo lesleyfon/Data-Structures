@@ -89,23 +89,32 @@ class BSTNode:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if self.value is None:
+        # assign the self to a variable called max_node
+        max_node = self
+        # Check is there is no Node then we want to immediately return 0
+
+        if max_node.value is None:
             return 0
+        # Else there's a node and we want to traverse the tree
         else:
-            #     max_node = self.value
-            #     if self.right:
-            #         max_node = max_node.get_max()
-            #         return max_node
-            #     else:
-            #         return max_node.value
-            largest_node = self
-            while largest_node.right:
-                largest_node = largest_node.right
 
-            return largest_node.value
-        pass
+            # WE check is there is a right tree node. If there is a right tree node that means there is a node bigger than the current parent node so we want do some work
+            if max_node.right:
+                #  We reassign the right side of the tree to the max_node variable because the there is a right node and it is going to have a value larget than the current parent node and call the get_max to recursively do this operation over again
+                max_node = max_node.right
+                return max_node.get_max()
 
-    # Call the function `fn` on the value of each node
+            else:
+                # If there is no right side, that means the current parent node is the largest node in the tree and we can just return that parent nodes value
+                print("Value", max_node.value, "Right", max_node.right)
+                return max_node.value
+            # Alternative solution to the get_max problem
+            # largest_node = self
+            # while largest_node.right:
+            #     largest_node = largest_node.right
+
+    # Call the function `fn` on the value of each nodex
+
     def for_each(self, fn):
         pass
 
@@ -136,3 +145,13 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+bst = BSTNode(5)
+
+print(bst.get_max(), 5)
+bst.insert(30)
+print(bst.get_max(), 30)
+bst.insert(300)
+bst.insert(3)
+print(bst.get_max(), 300)

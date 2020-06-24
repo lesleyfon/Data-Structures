@@ -106,7 +106,7 @@ class BSTNode:
 
             else:
                 # If there is no right side, that means the current parent node is the largest node in the tree and we can just return that parent nodes value
-                print("Value", max_node.value, "Right", max_node.right)
+                # print("Value", max_node.value, "Right", max_node.right)
                 return max_node.value
             # Alternative solution to the get_max problem
             # largest_node = self
@@ -116,12 +116,47 @@ class BSTNode:
     # Call the function `fn` on the value of each nodex
 
     def for_each(self, fn):
-        pass
+        # DFS
+        if self.value is None:
+            return
+        stack = [self]
+
+        while len(stack) > 0:
+            current_node = stack.pop()
+
+            if current_node.left:
+                stack.append(current_node.left)
+
+            if current_node.right:
+                stack.append(current_node.right)
+
+            fn(current_node.value)
+
+    # def iter_bft_ for_each(self, fn):
+
+    #     stack = []
+    #     stack.append(self)
+
+    #     while len(stack) > 0:
+    #         # Pop of the stack and assing the popped value to a variable
+    #         current_node = stack.pop()
+    #         # Add the current nodes value to the stack
+    #         # Add the right child first and the left child second
+
+    #         if current_node.right:
+    #             stack.append(current_node.right)
+
+    #         if current_node.left:
+    #             stack.append(current_node.left)
+    #         fn(self.value)
+    #         # Call the dn node on the self.value
+    #         pass
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
@@ -145,13 +180,3 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
-
-
-bst = BSTNode(5)
-
-print(bst.get_max(), 5)
-bst.insert(30)
-print(bst.get_max(), 30)
-bst.insert(300)
-bst.insert(3)
-print(bst.get_max(), 300)

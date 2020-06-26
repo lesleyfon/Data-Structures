@@ -132,43 +132,56 @@ class BSTNode:
 
             fn(current_node.value)
 
-    # def iter_bft_ for_each(self, fn):
-
-    #     stack = []
-    #     stack.append(self)
-
-    #     while len(stack) > 0:
-    #         # Pop of the stack and assing the popped value to a variable
-    #         current_node = stack.pop()
-    #         # Add the current nodes value to the stack
-    #         # Add the right child first and the left child second
-
-    #         if current_node.right:
-    #             stack.append(current_node.right)
-
-    #         if current_node.left:
-    #             stack.append(current_node.left)
-    #         fn(self.value)
-    #         # Call the dn node on the self.value
-    #         pass
-
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
+        # DFS
+        if self.left:
+            self.left.in_order_print(self.left)
+
+        print(self.value)
+
+        if self.right:
+            self.right.in_order_print(self.right)
+
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if self.value is None:
+            return None
+
+        stack = [self]
+        while len(stack) > 0:
+            current_node = stack.pop(0)
+
+            print(current_node.value)
+            if current_node.left:
+                stack.append(current_node.left)
+
+            if current_node.right:
+                stack.append(current_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        if self.value is None:
+            return None
+        queue = [self]
+        while len(queue) > 0:
+            current_node = queue.pop((len(queue) - 1))
+            print(current_node.value)
+            if current_node.left:
+                queue.append(current_node.left)
+
+            if current_node.right:
+                queue.append(current_node.right)
+            pass
 
     # Stretch Goals -------------------------
     # Note: Research may be required
